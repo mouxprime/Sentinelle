@@ -1,0 +1,38 @@
+# FastAPI & Server
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-multipart==0.0.12
+websockets==13.1
+
+# Database
+sqlalchemy==2.0.36
+psycopg2-binary==2.9.10
+geoalchemy2==0.15.2
+alembic==1.14.0
+
+# Redis
+redis==5.2.0
+hiredis==3.0.0
+
+# Data Collection
+telethon==1.37.0
+feedparser==6.0.11
+discord.py==2.4.0
+FlightRadarAPI==1.3.28
+requests==2.32.3
+
+# LLM & Processing
+openai==1.54.4
+geopy==2.4.1
+python-dateutil==2.9.0
+
+# Utilities
+python-dotenv==1.0.1
+pydantic==2.10.2
+pydantic-settings==2.6.1
+asyncio==3.4.3
+aiohttp==3.11.7
+apscheduler==3.10.4
+
+# Monitoring & Logging
+loguru==0.7.3
