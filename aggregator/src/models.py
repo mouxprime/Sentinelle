@@ -110,7 +110,7 @@ class Event(Base):
     processing_error = Column(Text)
 
     # Metadata
-    metadata = Column(JSON)  # Additional source-specific metadata
+    event_metadata = Column(JSON)  # Additional source-specific metadata
 
     # Relationships
     source = relationship("Source", back_populates="events")
@@ -181,7 +181,7 @@ class Flight(Base):
     destination_airport = Column(String(4))
 
     # Metadata
-    metadata = Column(JSON)
+    extra_metadata = Column(JSON)
 
     __table_args__ = (
         Index("idx_flights_callsign", "callsign"),
@@ -219,7 +219,7 @@ class Vessel(Base):
     timestamp = Column(DateTime, default=datetime.utcnow)
 
     # Metadata
-    metadata = Column(JSON)
+    extra_metadata = Column(JSON)
 
     __table_args__ = (
         Index("idx_vessels_name", "vessel_name"),

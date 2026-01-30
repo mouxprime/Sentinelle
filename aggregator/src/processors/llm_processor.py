@@ -37,11 +37,30 @@ Be precise and objective. If information is not available, use null."""
 
     def __init__(self):
         """Initialize LLM processor."""
-        self.client = OpenAI(
-            base_url=settings.llm_api_url,
-            api_key="not-needed"  # LM Studio doesn't require API key
-        )
-        self.geocoder = Nominatim(user_agent="osint_aggregator")
+        self._client = None
+        self._geocoder = None
+
+    @property
+    def client(self):
+        """Lazy-load OpenAI client."""
+        if self._client is None:
+            try:
+                self._client = OpenAI(
+                    base_url=settings.llm_api_url,
+                    api_key="not-needed"  # LM Studio doesn't require API key
+                )
+                logger.info("OpenAI client initialized successfully")
+            except Exception as e:
+                logger.error(f"Failed to initialize OpenAI client: {e}")
+                raise
+        return self._client
+
+    @property
+    def geocoder(self):
+        """Lazy-load geocoder."""
+        if self._geocoder is None:
+            self._geocoder = Nominatim(user_agent="osint_aggregator")
+        return self._geocoder
 
     async def process_pending_events(self, batch_size: int = 10):
         """Process pending events in batches."""

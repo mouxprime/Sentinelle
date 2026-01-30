@@ -97,7 +97,7 @@ class RSSCollector:
                     collected_at=datetime.utcnow(),
                     event_time=event_time,
                     is_processed=False,
-                    metadata={
+                    event_metadata={
                         "link": entry.get("link"),
                         "author": entry.get("author"),
                         "tags": [tag.term for tag in entry.get("tags", [])]

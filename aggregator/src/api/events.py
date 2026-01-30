@@ -116,7 +116,7 @@ async def create_event(event_data: EventCreate, db: Session = Depends(get_db)):
     )
 
     if event_data.metadata:
-        event.metadata = event_data.metadata
+        event.event_metadata = event_data.metadata
 
     db.add(event)
     db.commit()

@@ -102,7 +102,7 @@ class TelegramCollector:
                     collected_at=datetime.utcnow(),
                     event_time=message.date,
                     is_processed=False,
-                    metadata={
+                    event_metadata={
                         "message_id": message.id,
                         "views": message.views if message.views else 0,
                         "forwards": message.forwards if message.forwards else 0,

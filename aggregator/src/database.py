@@ -32,5 +32,22 @@ def init_db():
     """Initialize database tables."""
     # Import all models here to ensure they are registered
     from . import models  # noqa
+    from sqlalchemy import inspect
+    from loguru import logger
 
-    Base.metadata.create_all(bind=engine)
+    try:
+        # Check if tables exist
+        inspector = inspect(engine)
+        existing_tables = inspector.get_table_names()
+
+        if not existing_tables:
+            logger.info("Creating database schema...")
+            Base.metadata.create_all(bind=engine, checkfirst=True)
+            logger.info("Database schema created successfully")
+        else:
+            logger.info(f"Database already initialized with {len(existing_tables)} tables")
+            # Try to create any missing tables/indexes
+            Base.metadata.create_all(bind=engine, checkfirst=True)
+    except Exception as e:
+        logger.warning(f"Database initialization warning (may be normal if already initialized): {e}")
+        # Continue anyway as tables might already exist
